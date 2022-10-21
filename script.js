@@ -1,38 +1,49 @@
 
+
 $(function () {
     // jqueryで値を取ってくる関数はval()
-    console.log('hello world');
+    // console.log('hello world');
 
     $('button').on('click', function () {
         let snack = $('input').val();
         let parameter = {
-            apiky: snack
+            type: snack,
+            apikey: "guest",
+            format: "jsonp",
 
 
         }
         // Ajaxの書き方
 
-        $.ajax({  
+        $.ajax({
             url: 'https://sysbird.jp/toriko/api/', //アクセスするURL
             type: 'get', //post or get
             cache: false,        //cacheを使うか使わないかを設定
-            dataType: 'json',     //data type script・xmlDocument・jsonなど
+            dataType: 'jsonp',     //data type script・xmlDocument・jsonなど
             data: parameter,           //アクセスするときに必要なデータを記載      
         })
             .done(function (response) {
                 //通信成功時の処理
                 console.log(response);
-                // 中身の取り出し方
-                // 配列名[要素番号]
-                console.log(response.results);
-                console.log(response.results[0]);
-                // console.log();results[0]
-                console.log(response.results[0].address1);
-                // DOMの操作　jquery append関数
-                // append は追加text　はその部分だけ（北谷町吉原　のみ）
-            
-                $('.result').append(response.results[0].address1)
-                $('.result').append(response.results[0].address2)
+                console.log(response.item[0].image);
+                console.log(response.item[0].name);
+                console.log(response.item[0].price);
+
+
+                for (temple of response.item) {
+                    console.log(temple);
+                    let template = `<div class="result-01">
+                    <img src="${temple.image}" alt="">
+                    <h1>${temple.name}</h1>
+                    <p>${temple.price}</p>
+                </div>`;
+                    $(".result").append(template);
+                }
+
+
+
+
+
                 //成功したとき実行したいスクリプトを記載
             })
 
@@ -56,3 +67,4 @@ $(function () {
 
 
 }) //ここが最後
+
