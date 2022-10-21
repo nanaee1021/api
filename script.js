@@ -6,7 +6,7 @@ $(function () {
     $('button').on('click', function () {
         let snack = $('input').val();
         let parameter = {
-            list: snack
+            apiky: snack
 
 
         }
