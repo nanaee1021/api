@@ -7,7 +7,9 @@ $(function () {
     $('button').on('click', function () {
         let snack = $('input').val();
         let parameter = {
-            apiky: snack
+            type: snack,
+            apikey:"guest",
+            format:"jsonp"
 
 
         }
